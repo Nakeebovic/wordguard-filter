@@ -1,6 +1,8 @@
 import { AhoCorasickTrie } from './trie';
 import { normalizeText } from './normalizer';
 import { loadWordDatabase, getFilteredWords, validateWord } from './data/loader';
+import { FuzzyMatcher, DetectionStrictness } from './fuzzy-matcher';
+import { normalizeForEvasion } from './evasion-patterns';
 import {
     SensitiveWord,
     DetectionResult,
@@ -17,6 +19,7 @@ export class SensitiveWordFilter {
     private customWords: SensitiveWord[];
     private allWords: SensitiveWord[];
     private defaultOptions: Required<FilterOptions>;
+    private fuzzyMatcher: FuzzyMatcher;
 
     constructor(options: FilterOptions = {}) {
         this.trie = new AhoCorasickTrie();
@@ -41,6 +44,16 @@ export class SensitiveWordFilter {
             detectRepeatedLetters: options.detectRepeatedLetters ?? true,
             detectLanguageMixing: options.detectLanguageMixing ?? true
         };
+
+        // Initialize fuzzy matcher
+        this.fuzzyMatcher = new FuzzyMatcher({
+            strictness: this.defaultOptions.strictness as DetectionStrictness,
+            maxEditDistance: this.defaultOptions.maxEditDistance,
+            detectSymbolReplacement: this.defaultOptions.detectSymbolReplacement,
+            detectSpaceInsertion: this.defaultOptions.detectSpaceInsertion,
+            detectRepeatedLetters: this.defaultOptions.detectRepeatedLetters,
+            detectLanguageMixing: this.defaultOptions.detectLanguageMixing
+        });
 
         // Load default word database
         this.loadDefaultWords();
@@ -153,6 +166,17 @@ export class SensitiveWordFilter {
             ...this.defaultOptions,
             ...options
         };
+
+        // Update fuzzy matcher options
+        this.fuzzyMatcher.setOptions({
+            strictness: this.defaultOptions.strictness as DetectionStrictness,
+            maxEditDistance: this.defaultOptions.maxEditDistance,
+            detectSymbolReplacement: this.defaultOptions.detectSymbolReplacement,
+            detectSpaceInsertion: this.defaultOptions.detectSpaceInsertion,
+            detectRepeatedLetters: this.defaultOptions.detectRepeatedLetters,
+            detectLanguageMixing: this.defaultOptions.detectLanguageMixing
+        });
+
         this.rebuildTrie();
     }
 
@@ -176,17 +200,22 @@ export class SensitiveWordFilter {
             ? normalizeText(text)
             : text;
 
-        // Search for matches
+        // Search for matches using trie
         const rawMatches = this.trie.search(processedText, effectiveOptions.partialMatch);
 
         // Convert to DetectionMatch format
-        const matches: DetectionMatch[] = rawMatches.map(match => ({
+        let matches: DetectionMatch[] = rawMatches.map(match => ({
             word: match.word,
             severity: match.severity as SeverityLevel,
             category: match.category,
             position: match.position,
             length: match.length
         }));
+
+        // If fuzzy matching is enabled and no matches found, try fuzzy matching
+        if (effectiveOptions.enableFuzzyMatching && matches.length === 0) {
+            matches = this.fuzzyMatchWords(text, effectiveOptions);
+        }
 
         // Generate cleaned text if replacement is enabled
         let cleanedText: string | undefined;
@@ -220,6 +249,58 @@ export class SensitiveWordFilter {
 
         const result = this.detect(text, effectiveOptions);
         return result.cleanedText || text;
+    }
+
+    /**
+     * Perform fuzzy matching against all words
+     */
+    private fuzzyMatchWords(text: string, options: Required<FilterOptions>): DetectionMatch[] {
+        const matches: DetectionMatch[] = [];
+
+        // Get all words that match the current filter criteria
+        const filteredWords = getFilteredWords(this.allWords, {
+            minSeverity: options.minSeverity,
+            maxSeverity: options.maxSeverity,
+            languages: options.languages,
+            categories: options.categories.length > 0 ? options.categories : undefined
+        });
+
+        // Add custom words
+        const allWords = [...filteredWords, ...this.customWords];
+
+        // Normalize text for fuzzy matching
+        const normalizedText = normalizeForEvasion(text, {
+            removeSymbols: options.detectSymbolReplacement,
+            removeSpaces: options.detectSpaceInsertion,
+            normalizeRepeated: options.detectRepeatedLetters,
+            substituteCharacters: true,
+            handleLanguageMixing: options.detectLanguageMixing
+        });
+
+        // Check each word
+        for (const wordEntry of allWords) {
+            const normalizedWord = normalizeForEvasion(wordEntry.word, {
+                removeSymbols: options.detectSymbolReplacement,
+                removeSpaces: options.detectSpaceInsertion,
+                normalizeRepeated: options.detectRepeatedLetters,
+                substituteCharacters: true,
+                handleLanguageMixing: options.detectLanguageMixing
+            });
+
+            // Check if normalized text contains the normalized word
+            if (normalizedText.includes(normalizedWord)) {
+                const position = text.toLowerCase().indexOf(wordEntry.word.toLowerCase());
+                matches.push({
+                    word: wordEntry.word,
+                    severity: wordEntry.severity,
+                    category: wordEntry.category || 'unknown',
+                    position: position >= 0 ? position : 0,
+                    length: wordEntry.word.length
+                });
+            }
+        }
+
+        return matches;
     }
 
     /**
