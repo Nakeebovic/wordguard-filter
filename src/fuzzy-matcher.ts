@@ -1,12 +1,13 @@
-import { normalizeForEvasion, detectEvasionTechnique } from './evasion-patterns';
+import { normalizeForEvasion, normalizeParanoid, detectEvasionTechnique } from './evasion-patterns';
 
 /**
  * Strictness levels for fuzzy matching
  */
 export enum DetectionStrictness {
-    LOW = 1,      // Only exact matches
-    MEDIUM = 2,   // Basic evasion detection (symbols, spaces)
-    HIGH = 3      // Aggressive fuzzy matching (all techniques)
+    LOW = 1,       // Only exact matches
+    MEDIUM = 2,    // Basic evasion detection (symbols, spaces)
+    HIGH = 3,      // Aggressive fuzzy matching (all techniques)
+    PARANOID = 4   // Maximum detection - catches EVERYTHING
 }
 
 /**
@@ -62,6 +63,58 @@ export class FuzzyMatcher {
                 matched,
                 confidence: matched ? 1.0 : 0.0,
                 normalizedText: text.toLowerCase(),
+                evasionTechniques: []
+            };
+        }
+
+        // PARANOID mode - use maximum normalization
+        if (this.options.strictness === DetectionStrictness.PARANOID) {
+            const paranoidText = normalizeParanoid(text);
+            const paranoidWord = normalizeParanoid(word);
+
+            // Check for exact match after paranoid normalization
+            if (paranoidText === paranoidWord) {
+                const techniques = detectEvasionTechnique(originalText, paranoidText);
+                return {
+                    matched: true,
+                    confidence: 0.99,
+                    normalizedText: paranoidText,
+                    evasionTechniques: techniques
+                };
+            }
+
+            // Check if paranoid text contains the word
+            if (paranoidText.includes(paranoidWord)) {
+                const techniques = detectEvasionTechnique(originalText, paranoidText);
+                return {
+                    matched: true,
+                    confidence: 0.95,
+                    normalizedText: paranoidText,
+                    evasionTechniques: techniques
+                };
+            }
+
+            // Use higher edit distance threshold for paranoid mode
+            const distance = this.levenshteinDistance(paranoidText, paranoidWord);
+            const maxLength = Math.max(paranoidText.length, paranoidWord.length);
+            const maxAllowedDistance = Math.max(this.options.maxEditDistance, Math.ceil(paranoidWord.length * 0.4));
+
+            if (distance <= maxAllowedDistance) {
+                const confidence = 1 - (distance / maxLength);
+                const techniques = detectEvasionTechnique(originalText, paranoidText);
+
+                return {
+                    matched: confidence >= 0.5, // Lower threshold for paranoid
+                    confidence,
+                    normalizedText: paranoidText,
+                    evasionTechniques: techniques
+                };
+            }
+
+            return {
+                matched: false,
+                confidence: 0.0,
+                normalizedText: paranoidText,
                 evasionTechniques: []
             };
         }

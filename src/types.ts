@@ -12,9 +12,10 @@ export enum SeverityLevel {
  * Detection strictness levels for fuzzy matching
  */
 export enum DetectionStrictness {
-    LOW = 1,      // Only exact matches
-    MEDIUM = 2,   // Basic evasion detection (symbols, spaces)
-    HIGH = 3      // Aggressive fuzzy matching (all techniques)
+    LOW = 1,       // Only exact matches
+    MEDIUM = 2,    // Basic evasion detection (symbols, spaces)
+    HIGH = 3,      // Aggressive fuzzy matching (all techniques)
+    PARANOID = 4   // Maximum detection - catches EVERYTHING (may have false positives)
 }
 
 /**

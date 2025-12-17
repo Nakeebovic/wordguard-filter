@@ -7,41 +7,149 @@
  * Character substitution map - common replacements used in leet speak and evasion
  */
 export const CHARACTER_SUBSTITUTIONS: { [key: string]: string[] } = {
-    'a': ['@', '4', 'α', 'а', 'ā', 'á', 'à', 'â', 'ä', 'ã', 'å'],
-    'b': ['8', 'ß', 'в', 'ḃ', '6'],
-    'c': ['ç', 'ć', 'č', 'ĉ'],  // Removed special chars that break regex
-    'd': ['đ', 'ď'],
-    'e': ['3', '€', 'е', 'ē', 'é', 'è', 'ê', 'ë', 'ė', 'ę'],
-    'f': ['ƒ', 'ph'],
-    'g': ['9', '6', 'ğ', 'ģ', 'ġ'],
-    'h': ['#', 'ħ', 'ĥ'],
-    'i': ['1', '!', 'í', 'ì', 'î', 'ï', 'ī', 'į', 'ı'],
-    'j': ['ĵ'],
-    'k': ['ķ'],
-    'l': ['1', 'ł', 'ĺ', 'ļ', 'ľ'],
-    'm': ['м'],
-    'n': ['ñ', 'ń', 'ň', 'ņ'],
-    'o': ['0', 'ο', 'о', 'ō', 'ó', 'ò', 'ô', 'ö', 'õ', 'ø'],
-    'p': ['р', 'þ'],
-    'q': ['9'],
-    'r': ['я', 'ŕ', 'ř', 'ŗ'],
-    's': ['$', '5', 'ś', 'š', 'ş', 'ș', 'ŝ'],
-    't': ['7', '†', 'ţ', 'ť', 'ț'],
-    'u': ['υ', 'ū', 'ú', 'ù', 'û', 'ü', 'ů', 'ų'],
-    'v': ['ν'],
-    'w': ['vv', 'ω', 'ŵ'],
-    'x': ['×'],
-    'y': ['ý', 'ÿ', 'ŷ'],
-    'z': ['2', 'ź', 'ž', 'ż']
+    'a': ['@', '4', 'α', 'а', 'ā', 'á', 'à', 'â', 'ä', 'ã', 'å', 'ａ', 'Ａ', 'ⓐ', '🅐', '🅰'],
+    'b': ['8', 'ß', 'в', 'ḃ', '6', 'ｂ', 'Ｂ', 'ⓑ', '🅑', '🅱'],
+    'c': ['ç', 'ć', 'č', 'ĉ', 'ｃ', 'Ｃ', 'ⓒ', '🅒', '©'],
+    'd': ['đ', 'ď', 'ｄ', 'Ｄ', 'ⓓ', '🅓'],
+    'e': ['3', '€', 'е', 'ē', 'é', 'è', 'ê', 'ë', 'ė', 'ę', 'ｅ', 'Ｅ', 'ⓔ', '🅔'],
+    'f': ['ƒ', 'ph', 'ｆ', 'Ｆ', 'ⓕ', '🅕'],
+    'g': ['9', '6', 'ğ', 'ģ', 'ġ', 'ｇ', 'Ｇ', 'ⓖ', '🅖'],
+    'h': ['#', 'ħ', 'ĥ', 'ｈ', 'Ｈ', 'ⓗ', '🅗'],
+    'i': ['1', '!', 'í', 'ì', 'î', 'ï', 'ī', 'į', 'ı', 'ｉ', 'Ｉ', 'ⓘ', '🅘', '|', 'l'],
+    'j': ['ĵ', 'ｊ', 'Ｊ', 'ⓙ', '🅙'],
+    'k': ['ķ', 'ｋ', 'Ｋ', 'ⓚ', '🅚'],
+    'l': ['1', 'ł', 'ĺ', 'ļ', 'ľ', 'ｌ', 'Ｌ', 'ⓛ', '🅛', '|', 'I'],
+    'm': ['м', 'ｍ', 'Ｍ', 'ⓜ', '🅜'],
+    'n': ['ñ', 'ń', 'ň', 'ņ', 'ｎ', 'Ｎ', 'ⓝ', '🅝'],
+    'o': ['0', 'ο', 'о', 'ō', 'ó', 'ò', 'ô', 'ö', 'õ', 'ø', 'ｏ', 'Ｏ', 'ⓞ', '🅞', '○', '◯'],
+    'p': ['р', 'þ', 'ｐ', 'Ｐ', 'ⓟ', '🅟'],
+    'q': ['9', 'ｑ', 'Ｑ', 'ⓠ', '🅠'],
+    'r': ['я', 'ŕ', 'ř', 'ŗ', 'ｒ', 'Ｒ', 'ⓡ', '🅡', '®'],
+    's': ['$', '5', 'ś', 'š', 'ş', 'ș', 'ŝ', 'ｓ', 'Ｓ', 'ⓢ', '🅢'],
+    't': ['7', '†', 'ţ', 'ť', 'ț', 'ｔ', 'Ｔ', 'ⓣ', '🅣', '+'],
+    'u': ['υ', 'ū', 'ú', 'ù', 'û', 'ü', 'ů', 'ų', 'ｕ', 'Ｕ', 'ⓤ', '🅤', 'µ'],
+    'v': ['ν', 'ｖ', 'Ｖ', 'ⓥ', '🅥'],
+    'w': ['vv', 'ω', 'ŵ', 'ｗ', 'Ｗ', 'ⓦ', '🅦'],
+    'x': ['×', 'ｘ', 'Ｘ', 'ⓧ', '🅧', '✕', '✖'],
+    'y': ['ý', 'ÿ', 'ŷ', 'ｙ', 'Ｙ', 'ⓨ', '🅨'],
+    'z': ['2', 'ź', 'ž', 'ż', 'ｚ', 'Ｚ', 'ⓩ', '🅩']
 };
 
 /**
- * Reverse map for quick lookup
+ * Arabic letter substitutions - similar looking characters and common evasion tricks
+ */
+export const ARABIC_SUBSTITUTIONS: { [key: string]: string[] } = {
+    // Alef variations
+    'ا': ['أ', 'إ', 'آ', 'ٱ', 'ٲ', 'ٳ', 'ٵ', 'ﺍ', 'ﺎ', '1', '|', 'l', 'I', 'ﺃ', 'ﺄ', 'ﺇ', 'ﺈ'],
+    // Beh variations
+    'ب': ['ٮ', 'پ', 'ڀ', 'ﺏ', 'ﺐ', 'ﺑ', 'ﺒ'],
+    // Teh variations
+    'ت': ['ٺ', 'ټ', 'ﺕ', 'ﺖ', 'ﺗ', 'ﺘ'],
+    // Theh variations
+    'ث': ['ٽ', 'ﺙ', 'ﺚ', 'ﺛ', 'ﺜ'],
+    // Jeem variations
+    'ج': ['چ', 'ڃ', 'ڄ', 'ﺝ', 'ﺞ', 'ﺟ', 'ﺠ'],
+    // Hah variations
+    'ح': ['ځ', 'ڂ', 'ﺡ', 'ﺢ', 'ﺣ', 'ﺤ'],
+    // Khah variations
+    'خ': ['ڦ', 'ﺥ', 'ﺦ', 'ﺧ', 'ﺨ'],
+    // Dal variations
+    'د': ['ڈ', 'ډ', 'ڊ', 'ﺩ', 'ﺪ'],
+    // Thal variations
+    'ذ': ['ڌ', 'ﺫ', 'ﺬ'],
+    // Reh variations
+    'ر': ['ڑ', 'ړ', 'ڕ', 'ﺭ', 'ﺮ'],
+    // Zain variations
+    'ز': ['ڒ', 'ژ', 'ﺯ', 'ﺰ'],
+    // Seen variations
+    'س': ['ښ', 'ڛ', 'ﺱ', 'ﺲ', 'ﺳ', 'ﺴ'],
+    // Sheen variations
+    'ش': ['ڜ', 'ﺵ', 'ﺶ', 'ﺷ', 'ﺸ'],
+    // Sad variations
+    'ص': ['ڝ', 'ﺹ', 'ﺺ', 'ﺻ', 'ﺼ'],
+    // Dad variations
+    'ض': ['ڞ', 'ﺽ', 'ﺾ', 'ﺿ', 'ﻀ'],
+    // Tah variations
+    'ط': ['ﻁ', 'ﻂ', 'ﻃ', 'ﻄ'],
+    // Zah variations
+    'ظ': ['ﻅ', 'ﻆ', 'ﻇ', 'ﻈ'],
+    // Ain variations
+    'ع': ['ﻉ', 'ﻊ', 'ﻋ', 'ﻌ', '3'],
+    // Ghain variations
+    'غ': ['ﻍ', 'ﻎ', 'ﻏ', 'ﻐ'],
+    // Feh variations
+    'ف': ['ڡ', 'ڢ', 'ڣ', 'ﻑ', 'ﻒ', 'ﻓ', 'ﻔ'],
+    // Qaf variations
+    'ق': ['ڤ', 'ڥ', 'ﻕ', 'ﻖ', 'ﻗ', 'ﻘ'],
+    // Kaf variations
+    'ك': ['ک', 'ڪ', 'ﻙ', 'ﻚ', 'ﻛ', 'ﻜ', 'گ'],
+    // Lam variations
+    'ل': ['ڵ', 'ﻝ', 'ﻞ', 'ﻟ', 'ﻠ'],
+    // Meem variations
+    'م': ['ﻡ', 'ﻢ', 'ﻣ', 'ﻤ'],
+    // Noon variations
+    'ن': ['ں', 'ڻ', 'ﻥ', 'ﻦ', 'ﻧ', 'ﻨ'],
+    // Heh variations
+    'ه': ['ھ', 'ہ', 'ە', 'ﻩ', 'ﻪ', 'ﻫ', 'ﻬ', 'ة', 'ۃ'],
+    // Waw variations
+    'و': ['ۆ', 'ۇ', 'ۈ', 'ۉ', 'ﻭ', 'ﻮ', '0', 'o', 'O'],
+    // Yeh variations
+    'ي': ['ی', 'ۍ', 'ې', 'ے', 'ﻱ', 'ﻲ', 'ﻳ', 'ﻴ', 'ى', 'ئ'],
+    // Teh marbuta
+    'ة': ['ه', 'ھ', 'ہ', 'ۃ', 'ﺓ', 'ﺔ'],
+    // Hamza
+    'ء': ['ؤ', 'ئ', 'أ', 'إ']
+};
+
+/**
+ * Zero-width and invisible characters that should be removed
+ */
+export const INVISIBLE_CHARACTERS = [
+    '\u200B', // Zero-width space
+    '\u200C', // Zero-width non-joiner
+    '\u200D', // Zero-width joiner
+    '\u200E', // Left-to-right mark
+    '\u200F', // Right-to-left mark
+    '\u2060', // Word joiner
+    '\u2061', // Function application
+    '\u2062', // Invisible times
+    '\u2063', // Invisible separator
+    '\u2064', // Invisible plus
+    '\uFEFF', // Zero-width no-break space (BOM)
+    '\u00AD', // Soft hyphen
+    '\u034F', // Combining grapheme joiner
+    '\u061C', // Arabic letter mark
+    '\u115F', // Hangul choseong filler
+    '\u1160', // Hangul jungseong filler
+    '\u17B4', // Khmer vowel inherent aq
+    '\u17B5', // Khmer vowel inherent aa
+    '\u180E', // Mongolian vowel separator
+    '\u3164', // Hangul filler
+    '\uFFA0', // Halfwidth hangul filler
+];
+
+/**
+ * Arabic Tatweel (kashida) - used to stretch words
+ */
+export const ARABIC_TATWEEL = '\u0640'; // ـ
+
+/**
+ * Reverse map for quick lookup (English)
  */
 export const REVERSE_SUBSTITUTIONS: { [key: string]: string } = {};
 for (const [letter, substitutes] of Object.entries(CHARACTER_SUBSTITUTIONS)) {
     for (const substitute of substitutes) {
         REVERSE_SUBSTITUTIONS[substitute.toLowerCase()] = letter;
+    }
+}
+
+/**
+ * Reverse map for Arabic substitutions
+ */
+export const REVERSE_ARABIC_SUBSTITUTIONS: { [key: string]: string } = {};
+for (const [letter, substitutes] of Object.entries(ARABIC_SUBSTITUTIONS)) {
+    for (const substitute of substitutes) {
+        REVERSE_ARABIC_SUBSTITUTIONS[substitute] = letter;
     }
 }
 
@@ -131,16 +239,45 @@ export function normalizeForEvasion(text: string, options: {
     normalizeRepeated?: boolean;
     substituteCharacters?: boolean;
     handleLanguageMixing?: boolean;
+    removeInvisible?: boolean;
+    removeTatweel?: boolean;
+    normalizeArabic?: boolean;
 } = {}): string {
     const {
         removeSymbols = true,
         removeSpaces = true,
         normalizeRepeated = true,
         substituteCharacters = true,
-        handleLanguageMixing = true
+        handleLanguageMixing = true,
+        removeInvisible = true,
+        removeTatweel = true,
+        normalizeArabic = true
     } = options;
 
     let normalized = text.toLowerCase();
+
+    // Remove invisible characters FIRST (very important!)
+    if (removeInvisible) {
+        for (const char of INVISIBLE_CHARACTERS) {
+            normalized = normalized.split(char).join('');
+        }
+    }
+
+    // Remove Arabic Tatweel (kashida stretching)
+    if (removeTatweel) {
+        normalized = normalized.replace(new RegExp(ARABIC_TATWEEL, 'g'), '');
+    }
+
+    // Normalize Arabic character variations
+    if (normalizeArabic) {
+        for (const [original, substitutes] of Object.entries(ARABIC_SUBSTITUTIONS)) {
+            for (const substitute of substitutes) {
+                normalized = normalized.split(substitute).join(original);
+            }
+        }
+        // Also remove Arabic diacritics (tashkeel)
+        normalized = normalized.replace(/[\u064B-\u065F\u0670]/g, '');
+    }
 
     // Handle language mixing (Arabic to English)
     if (handleLanguageMixing) {
@@ -153,7 +290,8 @@ export function normalizeForEvasion(text: string, options: {
     if (substituteCharacters) {
         for (const [original, substitutes] of Object.entries(CHARACTER_SUBSTITUTIONS)) {
             for (const substitute of substitutes) {
-                normalized = normalized.replace(new RegExp(substitute, 'gi'), original);
+                // Use split/join instead of regex to handle special characters
+                normalized = normalized.split(substitute.toLowerCase()).join(original);
             }
         }
     }
@@ -178,6 +316,31 @@ export function normalizeForEvasion(text: string, options: {
             return char.repeat(MAX_REPEATED_CHARS);
         });
     }
+
+    return normalized;
+}
+
+/**
+ * Aggressive normalization for paranoid mode - removes EVERYTHING suspicious
+ */
+export function normalizeParanoid(text: string): string {
+    let normalized = normalizeForEvasion(text, {
+        removeSymbols: true,
+        removeSpaces: true,
+        normalizeRepeated: true,
+        substituteCharacters: true,
+        handleLanguageMixing: true,
+        removeInvisible: true,
+        removeTatweel: true,
+        normalizeArabic: true
+    });
+
+    // Additional paranoid normalization
+    // Remove ALL non-alphanumeric characters except Arabic letters
+    normalized = normalized.replace(/[^\p{L}\p{N}]/gu, '');
+
+    // Collapse ALL repeated characters to single
+    normalized = normalized.replace(/(.)\1+/g, '$1');
 
     return normalized;
 }
