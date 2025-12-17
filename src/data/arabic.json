@@ -1,0 +1,722 @@
+{
+    "profanity": [
+        {
+            "word": "كس",
+            "severity": 4,
+            "variations": [
+                "كـس",
+                "ك س"
+            ]
+        },
+        {
+            "word": "عرص",
+            "severity": 3,
+            "variations": [
+                "عـرص",
+                "ع ر ص"
+            ]
+        },
+        {
+            "word": "خرا",
+            "severity": 3,
+            "variations": [
+                "خـرا",
+                "خ را",
+                "خره"
+            ]
+        },
+        {
+            "word": "كلب",
+            "severity": 2,
+            "variations": [
+                "كـلب",
+                "ك لب"
+            ]
+        },
+        {
+            "word": "حمار",
+            "severity": 2,
+            "variations": [
+                "حـمار",
+                "ح مار"
+            ]
+        },
+        {
+            "word": "زبي",
+            "severity": 4,
+            "variations": [
+                "زبـي",
+                "ز بي",
+                "زب"
+            ]
+        },
+        {
+            "word": "شرموط",
+            "severity": 4,
+            "variations": [
+                "شرموطه",
+                "شرموطة",
+                "ش رموط"
+            ]
+        },
+        {
+            "word": "قحبة",
+            "severity": 4,
+            "variations": [
+                "قحبه",
+                "ق حبة"
+            ]
+        },
+        {
+            "word": "عاهرة",
+            "severity": 4,
+            "variations": [
+                "عاهره",
+                "ع اهرة"
+            ]
+        },
+        {
+            "word": "منيوك",
+            "severity": 4,
+            "variations": [
+                "منيوكه",
+                "م نيوك"
+            ]
+        },
+        {
+            "word": "ابن الكلب",
+            "severity": 3,
+            "variations": [
+                "ابن كلب",
+                "بن الكلب"
+            ]
+        },
+        {
+            "word": "ابن الحرام",
+            "severity": 3,
+            "variations": [
+                "بن الحرام",
+                "ابن حرام"
+            ]
+        },
+        {
+            "word": "يلعن",
+            "severity": 2,
+            "variations": [
+                "يلعن دينك",
+                "لعنة"
+            ]
+        },
+        {
+            "word": "نيك",
+            "severity": 4,
+            "variations": [
+                "ناك",
+                "نايك",
+                "ن يك"
+            ]
+        },
+        {
+            "word": "طيز",
+            "severity": 3,
+            "variations": [
+                "طـيز",
+                "ط يز"
+            ]
+        },
+        {
+            "word": "زبالة",
+            "severity": 2,
+            "variations": [
+                "زباله"
+            ]
+        },
+        {
+            "word": "وسخ",
+            "severity": 2,
+            "variations": [
+                "و سخ"
+            ]
+        },
+        {
+            "word": "حقير",
+            "severity": 2,
+            "variations": [
+                "ح قير"
+            ]
+        },
+        {
+            "word": "لعين",
+            "severity": 2,
+            "variations": [
+                "ل عين"
+            ]
+        },
+        {
+            "word": "منحط",
+            "severity": 3,
+            "variations": [
+                "م نحط"
+            ]
+        },
+        {
+            "word": "قذر",
+            "severity": 2,
+            "variations": [
+                "ق ذر"
+            ]
+        },
+        {
+            "word": "نذل",
+            "severity": 2,
+            "variations": [
+                "ن ذل"
+            ]
+        }
+    ],
+    "hate_speech": [
+        {
+            "word": "كافر",
+            "severity": 3,
+            "variations": [
+                "كفار",
+                "ك افر"
+            ]
+        },
+        {
+            "word": "مرتد",
+            "severity": 3,
+            "variations": [
+                "م رتد"
+            ]
+        },
+        {
+            "word": "خنزير",
+            "severity": 3,
+            "variations": [
+                "خنازير",
+                "خ نزير"
+            ]
+        },
+        {
+            "word": "قرد",
+            "severity": 3,
+            "variations": [
+                "قرود",
+                "ق رد"
+            ]
+        },
+        {
+            "word": "حقير",
+            "severity": 2,
+            "variations": [
+                "ح قير"
+            ]
+        },
+        {
+            "word": "وسخ",
+            "severity": 2,
+            "variations": [
+                "و سخ"
+            ]
+        },
+        {
+            "word": "نجس",
+            "severity": 3,
+            "variations": [
+                "ن جس"
+            ]
+        },
+        {
+            "word": "يهودي",
+            "severity": 2,
+            "variations": [
+                "يهود",
+                "ي هودي"
+            ]
+        },
+        {
+            "word": "صهيوني",
+            "severity": 3,
+            "variations": [
+                "ص هيوني"
+            ]
+        },
+        {
+            "word": "كلب اسرائيل",
+            "severity": 4,
+            "variations": [
+                "كلاب اسرائيل"
+            ]
+        },
+        {
+            "word": "خائن",
+            "severity": 3,
+            "variations": [
+                "خ ائن",
+                "خونة"
+            ]
+        },
+        {
+            "word": "عميل",
+            "severity": 3,
+            "variations": [
+                "ع ميل",
+                "عملاء"
+            ]
+        },
+        {
+            "word": "جاسوس",
+            "severity": 3,
+            "variations": [
+                "ج اسوس"
+            ]
+        },
+        {
+            "word": "منافق",
+            "severity": 2,
+            "variations": [
+                "م نافق",
+                "منافقين"
+            ]
+        },
+        {
+            "word": "فاسد",
+            "severity": 2,
+            "variations": [
+                "ف اسد",
+                "فاسدين"
+            ]
+        }
+    ],
+    "sexual": [
+        {
+            "word": "جنس",
+            "severity": 2,
+            "variations": [
+                "ج نس"
+            ]
+        },
+        {
+            "word": "سكس",
+            "severity": 3,
+            "variations": [
+                "س كس"
+            ]
+        },
+        {
+            "word": "اغتصاب",
+            "severity": 4,
+            "variations": [
+                "ا غتصاب"
+            ]
+        },
+        {
+            "word": "زنا",
+            "severity": 3,
+            "variations": [
+                "ز نا",
+                "زاني"
+            ]
+        },
+        {
+            "word": "فاحشة",
+            "severity": 3,
+            "variations": [
+                "ف احشة",
+                "فواحش"
+            ]
+        },
+        {
+            "word": "عري",
+            "severity": 2,
+            "variations": [
+                "عارية",
+                "ع ري"
+            ]
+        },
+        {
+            "word": "شهوة",
+            "severity": 2,
+            "variations": [
+                "ش هوة"
+            ]
+        },
+        {
+            "word": "بورنو",
+            "severity": 3,
+            "variations": [
+                "ب ورنو",
+                "اباحي"
+            ]
+        },
+        {
+            "word": "صدر",
+            "severity": 2,
+            "variations": [
+                "ص در"
+            ]
+        },
+        {
+            "word": "مؤخرة",
+            "severity": 2,
+            "variations": [
+                "م ؤخرة"
+            ]
+        },
+        {
+            "word": "عورة",
+            "severity": 2,
+            "variations": [
+                "ع ورة"
+            ]
+        },
+        {
+            "word": "لواط",
+            "severity": 4,
+            "variations": [
+                "ل واط"
+            ]
+        },
+        {
+            "word": "سحاق",
+            "severity": 4,
+            "variations": [
+                "س حاق"
+            ]
+        },
+        {
+            "word": "دعارة",
+            "severity": 4,
+            "variations": [
+                "د عارة"
+            ]
+        },
+        {
+            "word": "متعة",
+            "severity": 2,
+            "variations": [
+                "م تعة"
+            ]
+        }
+    ],
+    "violence": [
+        {
+            "word": "قتل",
+            "severity": 3,
+            "variations": [
+                "اقتل",
+                "ق تل",
+                "قاتل"
+            ]
+        },
+        {
+            "word": "ذبح",
+            "severity": 4,
+            "variations": [
+                "اذبح",
+                "ذ بح",
+                "ذابح"
+            ]
+        },
+        {
+            "word": "انتحار",
+            "severity": 3,
+            "variations": [
+                "ا نتحار"
+            ]
+        },
+        {
+            "word": "قنبلة",
+            "severity": 3,
+            "variations": [
+                "ق نبلة",
+                "قنابل"
+            ]
+        },
+        {
+            "word": "تفجير",
+            "severity": 4,
+            "variations": [
+                "فجر",
+                "ت فجير"
+            ]
+        },
+        {
+            "word": "ارهاب",
+            "severity": 4,
+            "variations": [
+                "ارهابي",
+                "ا رهاب"
+            ]
+        },
+        {
+            "word": "دم",
+            "severity": 2,
+            "variations": [
+                "دماء",
+                "د م"
+            ]
+        },
+        {
+            "word": "سلاح",
+            "severity": 2,
+            "variations": [
+                "س لاح",
+                "اسلحة"
+            ]
+        },
+        {
+            "word": "طعن",
+            "severity": 3,
+            "variations": [
+                "ط عن"
+            ]
+        },
+        {
+            "word": "تعذيب",
+            "severity": 4,
+            "variations": [
+                "ت عذيب",
+                "عذاب"
+            ]
+        },
+        {
+            "word": "اعدام",
+            "severity": 4,
+            "variations": [
+                "ا عدام"
+            ]
+        },
+        {
+            "word": "مجزرة",
+            "severity": 4,
+            "variations": [
+                "م جزرة"
+            ]
+        },
+        {
+            "word": "ابادة",
+            "severity": 4,
+            "variations": [
+                "ا بادة"
+            ]
+        },
+        {
+            "word": "حرق",
+            "severity": 3,
+            "variations": [
+                "ح رق",
+                "احرق"
+            ]
+        },
+        {
+            "word": "خطف",
+            "severity": 4,
+            "variations": [
+                "خ طف",
+                "اختطاف"
+            ]
+        }
+    ],
+    "drugs": [
+        {
+            "word": "مخدرات",
+            "severity": 3,
+            "variations": [
+                "م خدرات",
+                "مخدر"
+            ]
+        },
+        {
+            "word": "حشيش",
+            "severity": 3,
+            "variations": [
+                "ح شيش"
+            ]
+        },
+        {
+            "word": "كوكايين",
+            "severity": 3,
+            "variations": [
+                "ك وكايين"
+            ]
+        },
+        {
+            "word": "هيروين",
+            "severity": 3,
+            "variations": [
+                "ه يروين"
+            ]
+        },
+        {
+            "word": "خمر",
+            "severity": 2,
+            "variations": [
+                "خمور",
+                "خ مر"
+            ]
+        },
+        {
+            "word": "كحول",
+            "severity": 2,
+            "variations": [
+                "ك حول"
+            ]
+        },
+        {
+            "word": "سكران",
+            "severity": 2,
+            "variations": [
+                "س كران",
+                "سكارى"
+            ]
+        },
+        {
+            "word": "مسكر",
+            "severity": 2,
+            "variations": [
+                "م سكر"
+            ]
+        },
+        {
+            "word": "ترامادول",
+            "severity": 3,
+            "variations": [
+                "ت رامادول"
+            ]
+        },
+        {
+            "word": "افيون",
+            "severity": 3,
+            "variations": [
+                "ا فيون"
+            ]
+        },
+        {
+            "word": "مورفين",
+            "severity": 3,
+            "variations": [
+                "م ورفين"
+            ]
+        },
+        {
+            "word": "حبوب",
+            "severity": 2,
+            "variations": [
+                "ح بوب"
+            ]
+        }
+    ],
+    "insults": [
+        {
+            "word": "غبي",
+            "severity": 1,
+            "variations": [
+                "غ بي",
+                "اغبياء"
+            ]
+        },
+        {
+            "word": "احمق",
+            "severity": 2,
+            "variations": [
+                "ا حمق",
+                "حمقى"
+            ]
+        },
+        {
+            "word": "ساقط",
+            "severity": 2,
+            "variations": [
+                "س اقط"
+            ]
+        },
+        {
+            "word": "حقير",
+            "severity": 2,
+            "variations": [
+                "ح قير"
+            ]
+        },
+        {
+            "word": "قذر",
+            "severity": 2,
+            "variations": [
+                "ق ذر"
+            ]
+        },
+        {
+            "word": "وضيع",
+            "severity": 2,
+            "variations": [
+                "و ضيع"
+            ]
+        },
+        {
+            "word": "فاشل",
+            "severity": 1,
+            "variations": [
+                "ف اشل",
+                "فشلة"
+            ]
+        },
+        {
+            "word": "جاهل",
+            "severity": 1,
+            "variations": [
+                "ج اهل",
+                "جهلة"
+            ]
+        },
+        {
+            "word": "تافه",
+            "severity": 1,
+            "variations": [
+                "ت افه"
+            ]
+        },
+        {
+            "word": "رخيص",
+            "severity": 2,
+            "variations": [
+                "ر خيص"
+            ]
+        },
+        {
+            "word": "سافل",
+            "severity": 2,
+            "variations": [
+                "س افل"
+            ]
+        },
+        {
+            "word": "دنيء",
+            "severity": 2,
+            "variations": [
+                "د نيء"
+            ]
+        },
+        {
+            "word": "مقرف",
+            "severity": 2,
+            "variations": [
+                "م قرف"
+            ]
+        },
+        {
+            "word": "بليد",
+            "severity": 1,
+            "variations": [
+                "ب ليد"
+            ]
+        },
+        {
+            "word": "متخلف",
+            "severity": 2,
+            "variations": [
+                "م تخلف"
+            ]
+        }
+    ]
+}

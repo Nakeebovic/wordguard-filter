@@ -1,0 +1,911 @@
+{
+    "profanity": [
+        {
+            "word": "fuck",
+            "severity": 3,
+            "variations": [
+                "f*ck",
+                "fck",
+                "fuk",
+                "fvck",
+                "phuck",
+                "fuq",
+                "fuc",
+                "fawk"
+            ]
+        },
+        {
+            "word": "shit",
+            "severity": 2,
+            "variations": [
+                "sh*t",
+                "sht",
+                "shyt",
+                "shiz",
+                "shizzle",
+                "crap"
+            ]
+        },
+        {
+            "word": "damn",
+            "severity": 1,
+            "variations": [
+                "dam",
+                "dang",
+                "darn",
+                "dayum"
+            ]
+        },
+        {
+            "word": "hell",
+            "severity": 1,
+            "variations": [
+                "heck",
+                "h3ll"
+            ]
+        },
+        {
+            "word": "ass",
+            "severity": 2,
+            "variations": [
+                "a$$",
+                "azz",
+                "arse",
+                "a**"
+            ]
+        },
+        {
+            "word": "bitch",
+            "severity": 3,
+            "variations": [
+                "b*tch",
+                "btch",
+                "biatch",
+                "biotch",
+                "beotch",
+                "bish"
+            ]
+        },
+        {
+            "word": "bastard",
+            "severity": 2,
+            "variations": [
+                "b*stard",
+                "bstard",
+                "b@stard"
+            ]
+        },
+        {
+            "word": "piss",
+            "severity": 2,
+            "variations": [
+                "p*ss",
+                "pee"
+            ]
+        },
+        {
+            "word": "asshole",
+            "severity": 3,
+            "variations": [
+                "a**hole",
+                "a-hole",
+                "ahole",
+                "arsehole",
+                "a$$hole"
+            ]
+        },
+        {
+            "word": "motherfucker",
+            "severity": 4,
+            "variations": [
+                "mf",
+                "mofo",
+                "muthafucka",
+                "mothafucka",
+                "mfer"
+            ]
+        },
+        {
+            "word": "cock",
+            "severity": 3,
+            "variations": [
+                "c*ck",
+                "cawk",
+                "cok"
+            ]
+        },
+        {
+            "word": "dick",
+            "severity": 3,
+            "variations": [
+                "d*ck",
+                "dik",
+                "dck"
+            ]
+        },
+        {
+            "word": "pussy",
+            "severity": 3,
+            "variations": [
+                "p*ssy",
+                "pussie",
+                "puss"
+            ]
+        },
+        {
+            "word": "whore",
+            "severity": 3,
+            "variations": [
+                "wh*re",
+                "hore",
+                "ho"
+            ]
+        },
+        {
+            "word": "slut",
+            "severity": 3,
+            "variations": [
+                "sl*t",
+                "slt",
+                "slutt"
+            ]
+        },
+        {
+            "word": "cunt",
+            "severity": 4,
+            "variations": [
+                "c*nt",
+                "cnt",
+                "kunt"
+            ]
+        },
+        {
+            "word": "twat",
+            "severity": 3,
+            "variations": [
+                "tw*t"
+            ]
+        },
+        {
+            "word": "prick",
+            "severity": 2,
+            "variations": [
+                "pr*ck"
+            ]
+        },
+        {
+            "word": "bollocks",
+            "severity": 2,
+            "variations": [
+                "bollix",
+                "bullocks"
+            ]
+        },
+        {
+            "word": "wanker",
+            "severity": 2,
+            "variations": [
+                "w*nker",
+                "wank"
+            ]
+        },
+        {
+            "word": "douche",
+            "severity": 2,
+            "variations": [
+                "douchebag",
+                "doosh"
+            ]
+        },
+        {
+            "word": "jackass",
+            "severity": 2,
+            "variations": [
+                "jack*ss",
+                "jerkass"
+            ]
+        }
+    ],
+    "hate_speech": [
+        {
+            "word": "nigger",
+            "severity": 4,
+            "variations": [
+                "n*gger",
+                "n1gger",
+                "nigga",
+                "n1gga",
+                "nig",
+                "niqqa"
+            ]
+        },
+        {
+            "word": "faggot",
+            "severity": 4,
+            "variations": [
+                "f*ggot",
+                "fag",
+                "f@ggot",
+                "fagot",
+                "fgt"
+            ]
+        },
+        {
+            "word": "retard",
+            "severity": 3,
+            "variations": [
+                "r*tard",
+                "retarded",
+                "ret@rd",
+                "rtard"
+            ]
+        },
+        {
+            "word": "kike",
+            "severity": 4,
+            "variations": [
+                "k*ke"
+            ]
+        },
+        {
+            "word": "chink",
+            "severity": 4,
+            "variations": [
+                "ch*nk"
+            ]
+        },
+        {
+            "word": "spic",
+            "severity": 4,
+            "variations": [
+                "sp*c",
+                "spick"
+            ]
+        },
+        {
+            "word": "wetback",
+            "severity": 4,
+            "variations": []
+        },
+        {
+            "word": "raghead",
+            "severity": 4,
+            "variations": [
+                "rag head"
+            ]
+        },
+        {
+            "word": "terrorist",
+            "severity": 3,
+            "variations": [
+                "terr0rist"
+            ]
+        },
+        {
+            "word": "nazi",
+            "severity": 4,
+            "variations": [
+                "n@zi",
+                "naz1"
+            ]
+        },
+        {
+            "word": "dyke",
+            "severity": 4,
+            "variations": [
+                "d*ke",
+                "dike"
+            ]
+        },
+        {
+            "word": "tranny",
+            "severity": 4,
+            "variations": [
+                "tr*nny"
+            ]
+        },
+        {
+            "word": "gook",
+            "severity": 4,
+            "variations": []
+        },
+        {
+            "word": "beaner",
+            "severity": 4,
+            "variations": []
+        },
+        {
+            "word": "cracker",
+            "severity": 3,
+            "variations": [
+                "cracka"
+            ]
+        },
+        {
+            "word": "honkey",
+            "severity": 3,
+            "variations": [
+                "honky",
+                "honkie"
+            ]
+        },
+        {
+            "word": "towelhead",
+            "severity": 4,
+            "variations": [
+                "towel head"
+            ]
+        },
+        {
+            "word": "sandnigger",
+            "severity": 4,
+            "variations": [
+                "sand nigger"
+            ]
+        }
+    ],
+    "sexual": [
+        {
+            "word": "porn",
+            "severity": 2,
+            "variations": [
+                "p0rn",
+                "pr0n",
+                "pron"
+            ]
+        },
+        {
+            "word": "sex",
+            "severity": 1,
+            "variations": [
+                "s3x",
+                "sexx"
+            ]
+        },
+        {
+            "word": "nude",
+            "severity": 2,
+            "variations": [
+                "naked",
+                "nood"
+            ]
+        },
+        {
+            "word": "rape",
+            "severity": 4,
+            "variations": [
+                "r*pe",
+                "r@pe"
+            ]
+        },
+        {
+            "word": "molest",
+            "severity": 4,
+            "variations": [
+                "mol3st"
+            ]
+        },
+        {
+            "word": "pedophile",
+            "severity": 4,
+            "variations": [
+                "pedo",
+                "paedo",
+                "pedoph1le"
+            ]
+        },
+        {
+            "word": "horny",
+            "severity": 2,
+            "variations": [
+                "h0rny"
+            ]
+        },
+        {
+            "word": "orgasm",
+            "severity": 2,
+            "variations": [
+                "org@sm"
+            ]
+        },
+        {
+            "word": "masturbate",
+            "severity": 2,
+            "variations": [
+                "m@sturbate",
+                "jerkoff",
+                "wank"
+            ]
+        },
+        {
+            "word": "boobs",
+            "severity": 2,
+            "variations": [
+                "boobies",
+                "b00bs",
+                "bewbs"
+            ]
+        },
+        {
+            "word": "tits",
+            "severity": 3,
+            "variations": [
+                "titties",
+                "t1ts",
+                "boobies"
+            ]
+        },
+        {
+            "word": "anal",
+            "severity": 3,
+            "variations": [
+                "an@l"
+            ]
+        },
+        {
+            "word": "blowjob",
+            "severity": 3,
+            "variations": [
+                "bj",
+                "bl0wjob"
+            ]
+        },
+        {
+            "word": "handjob",
+            "severity": 3,
+            "variations": [
+                "hj",
+                "h@ndjob"
+            ]
+        },
+        {
+            "word": "cum",
+            "severity": 3,
+            "variations": [
+                "c*m",
+                "cumm"
+            ]
+        },
+        {
+            "word": "jizz",
+            "severity": 3,
+            "variations": [
+                "j1zz"
+            ]
+        },
+        {
+            "word": "dildo",
+            "severity": 2,
+            "variations": [
+                "d1ldo"
+            ]
+        },
+        {
+            "word": "vibrator",
+            "severity": 2,
+            "variations": [
+                "vibr@tor"
+            ]
+        },
+        {
+            "word": "fetish",
+            "severity": 2,
+            "variations": [
+                "fet1sh"
+            ]
+        },
+        {
+            "word": "kinky",
+            "severity": 2,
+            "variations": [
+                "k1nky"
+            ]
+        }
+    ],
+    "violence": [
+        {
+            "word": "kill",
+            "severity": 3,
+            "variations": [
+                "k1ll",
+                "kil",
+                "kll"
+            ]
+        },
+        {
+            "word": "murder",
+            "severity": 4,
+            "variations": [
+                "murd3r",
+                "murda"
+            ]
+        },
+        {
+            "word": "suicide",
+            "severity": 3,
+            "variations": [
+                "su1cide",
+                "suic1de"
+            ]
+        },
+        {
+            "word": "bomb",
+            "severity": 3,
+            "variations": [
+                "b0mb",
+                "bom"
+            ]
+        },
+        {
+            "word": "shoot",
+            "severity": 3,
+            "variations": [
+                "sh00t"
+            ]
+        },
+        {
+            "word": "stab",
+            "severity": 3,
+            "variations": [
+                "st@b"
+            ]
+        },
+        {
+            "word": "torture",
+            "severity": 4,
+            "variations": [
+                "t0rture"
+            ]
+        },
+        {
+            "word": "massacre",
+            "severity": 4,
+            "variations": [
+                "m@ssacre"
+            ]
+        },
+        {
+            "word": "genocide",
+            "severity": 4,
+            "variations": [
+                "gen0cide"
+            ]
+        },
+        {
+            "word": "assassinate",
+            "severity": 4,
+            "variations": [
+                "@ssassinate"
+            ]
+        },
+        {
+            "word": "rape",
+            "severity": 4,
+            "variations": [
+                "r@pe"
+            ]
+        },
+        {
+            "word": "attack",
+            "severity": 2,
+            "variations": [
+                "att@ck"
+            ]
+        },
+        {
+            "word": "assault",
+            "severity": 3,
+            "variations": [
+                "@ssault"
+            ]
+        },
+        {
+            "word": "kidnap",
+            "severity": 4,
+            "variations": [
+                "k1dnap"
+            ]
+        },
+        {
+            "word": "execute",
+            "severity": 4,
+            "variations": [
+                "execut3"
+            ]
+        },
+        {
+            "word": "slaughter",
+            "severity": 4,
+            "variations": [
+                "sl@ughter"
+            ]
+        },
+        {
+            "word": "butcher",
+            "severity": 3,
+            "variations": [
+                "butch3r"
+            ]
+        }
+    ],
+    "drugs": [
+        {
+            "word": "cocaine",
+            "severity": 3,
+            "variations": [
+                "coke",
+                "c0caine",
+                "blow",
+                "snow"
+            ]
+        },
+        {
+            "word": "heroin",
+            "severity": 3,
+            "variations": [
+                "her0in",
+                "smack",
+                "junk"
+            ]
+        },
+        {
+            "word": "meth",
+            "severity": 3,
+            "variations": [
+                "methamphetamine",
+                "m3th",
+                "crystal",
+                "ice"
+            ]
+        },
+        {
+            "word": "weed",
+            "severity": 2,
+            "variations": [
+                "marijuana",
+                "cannabis",
+                "pot",
+                "w33d",
+                "ganja",
+                "mary jane"
+            ]
+        },
+        {
+            "word": "crack",
+            "severity": 3,
+            "variations": [
+                "cr@ck",
+                "rock"
+            ]
+        },
+        {
+            "word": "ecstasy",
+            "severity": 3,
+            "variations": [
+                "mdma",
+                "molly",
+                "x",
+                "e"
+            ]
+        },
+        {
+            "word": "lsd",
+            "severity": 3,
+            "variations": [
+                "acid",
+                "tabs"
+            ]
+        },
+        {
+            "word": "opium",
+            "severity": 3,
+            "variations": [
+                "0pium"
+            ]
+        },
+        {
+            "word": "morphine",
+            "severity": 3,
+            "variations": [
+                "m0rphine"
+            ]
+        },
+        {
+            "word": "fentanyl",
+            "severity": 4,
+            "variations": [
+                "fent"
+            ]
+        },
+        {
+            "word": "oxy",
+            "severity": 3,
+            "variations": [
+                "oxycontin",
+                "percocet"
+            ]
+        },
+        {
+            "word": "xanax",
+            "severity": 2,
+            "variations": [
+                "xans",
+                "bars"
+            ]
+        },
+        {
+            "word": "adderall",
+            "severity": 2,
+            "variations": [
+                "addies",
+                "addy"
+            ]
+        },
+        {
+            "word": "ketamine",
+            "severity": 3,
+            "variations": [
+                "ket",
+                "k"
+            ]
+        },
+        {
+            "word": "pcp",
+            "severity": 3,
+            "variations": [
+                "angel dust"
+            ]
+        }
+    ],
+    "insults": [
+        {
+            "word": "idiot",
+            "severity": 1,
+            "variations": [
+                "1diot",
+                "idi0t"
+            ]
+        },
+        {
+            "word": "moron",
+            "severity": 1,
+            "variations": [
+                "m0ron"
+            ]
+        },
+        {
+            "word": "stupid",
+            "severity": 1,
+            "variations": [
+                "stup1d",
+                "stoopid"
+            ]
+        },
+        {
+            "word": "dumb",
+            "severity": 1,
+            "variations": [
+                "dum",
+                "dumbass"
+            ]
+        },
+        {
+            "word": "loser",
+            "severity": 2,
+            "variations": [
+                "l0ser",
+                "looser"
+            ]
+        },
+        {
+            "word": "ugly",
+            "severity": 2,
+            "variations": [
+                "uggo",
+                "ugl1"
+            ]
+        },
+        {
+            "word": "fat",
+            "severity": 2,
+            "variations": [
+                "f@t",
+                "fatty"
+            ]
+        },
+        {
+            "word": "trash",
+            "severity": 2,
+            "variations": [
+                "tr@sh",
+                "garbage"
+            ]
+        },
+        {
+            "word": "scum",
+            "severity": 2,
+            "variations": [
+                "scumbag"
+            ]
+        },
+        {
+            "word": "pathetic",
+            "severity": 2,
+            "variations": [
+                "path3tic"
+            ]
+        },
+        {
+            "word": "worthless",
+            "severity": 2,
+            "variations": [
+                "w0rthless"
+            ]
+        },
+        {
+            "word": "disgusting",
+            "severity": 2,
+            "variations": [
+                "disgust1ng"
+            ]
+        },
+        {
+            "word": "freak",
+            "severity": 2,
+            "variations": [
+                "fr3ak"
+            ]
+        },
+        {
+            "word": "creep",
+            "severity": 2,
+            "variations": [
+                "creepy",
+                "cr33p"
+            ]
+        },
+        {
+            "word": "weirdo",
+            "severity": 1,
+            "variations": [
+                "weird0"
+            ]
+        },
+        {
+            "word": "nerd",
+            "severity": 1,
+            "variations": [
+                "n3rd"
+            ]
+        },
+        {
+            "word": "geek",
+            "severity": 1,
+            "variations": [
+                "g33k"
+            ]
+        },
+        {
+            "word": "lame",
+            "severity": 1,
+            "variations": [
+                "l@me"
+            ]
+        },
+        {
+            "word": "noob",
+            "severity": 1,
+            "variations": [
+                "n00b",
+                "newb"
+            ]
+        },
+        {
+            "word": "peasant",
+            "severity": 1,
+            "variations": [
+                "pe@sant"
+            ]
+        }
+    ]
+}

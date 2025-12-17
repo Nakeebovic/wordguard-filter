@@ -1,0 +1,47 @@
+{
+  "name": "wordguard-filter",
+  "version": "1.0.0",
+  "description": "High-performance sensitive word detection for Arabic and English with configurable severity levels",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "benchmark": "node dist/tests/performance.test.js",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "profanity",
+    "filter",
+    "sensitive",
+    "words",
+    "arabic",
+    "english",
+    "content-moderation",
+    "text-filter",
+    "bad-words",
+    "censorship"
+  ],
+  "author": "Nakeebovic",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.6",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nakeebovic/wordguard-filter.git"
+  }
+}
