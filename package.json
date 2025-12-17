@@ -1,15 +1,30 @@
 {
   "name": "wordguard-filter",
-  "version": "1.0.4",
-  "description": "High-performance sensitive word detection for Arabic and English with configurable severity levels",
+  "version": "2.0.0",
+  "description": "High-performance sensitive word detection for Arabic and English with configurable severity levels, evasion detection, and context-aware filtering",
   "main": "dist/index.js",
+  "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
   "scripts": {
-    "build": "tsc",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc -p tsconfig.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
     "test": "jest",
     "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
     "benchmark": "node dist/tests/performance.test.js",
-    "prepublishOnly": "npm run build && npm test"
+    "lint": "eslint src/**/*.ts",
+    "prepublishOnly": "npm run build && npm test",
+    "clean": "rimraf dist"
   },
   "keywords": [
     "profanity",
@@ -21,7 +36,17 @@
     "content-moderation",
     "text-filter",
     "bad-words",
-    "censorship"
+    "censorship",
+    "profanity-filter",
+    "word-filter",
+    "swear-words",
+    "evasion-detection",
+    "leet-speak",
+    "unicode",
+    "rtl",
+    "moderation",
+    "chat-filter",
+    "game-filter"
   ],
   "author": "Nakeebovic",
   "license": "MIT",
@@ -35,7 +60,8 @@
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CHANGELOG.md"
   ],
   "engines": {
     "node": ">=14.0.0"
@@ -43,5 +69,13 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Nakeebovic/wordguard-filter.git"
+  },
+  "homepage": "https://github.com/Nakeebovic/wordguard-filter#readme",
+  "bugs": {
+    "url": "https://github.com/Nakeebovic/wordguard-filter/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/Nakeebovic"
   }
 }

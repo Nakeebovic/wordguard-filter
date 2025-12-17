@@ -1,14 +1,8 @@
 import { normalizeForEvasion, normalizeParanoid, detectEvasionTechnique } from './evasion-patterns';
+import { DetectionStrictness } from './types';
 
-/**
- * Strictness levels for fuzzy matching
- */
-export enum DetectionStrictness {
-    LOW = 1,       // Only exact matches
-    MEDIUM = 2,    // Basic evasion detection (symbols, spaces)
-    HIGH = 3,      // Aggressive fuzzy matching (all techniques)
-    PARANOID = 4   // Maximum detection - catches EVERYTHING
-}
+// Re-export for backward compatibility
+export { DetectionStrictness } from './types';
 
 /**
  * Fuzzy matching options

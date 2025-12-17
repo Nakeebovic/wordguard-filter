@@ -1,10 +1,14 @@
 /**
  * wordguard-filter
  * High-performance sensitive word detection for Arabic and English
+ * 
+ * @packageDocumentation
  */
 
 import { SensitiveWordFilter } from './filter';
 import { DetectionStrictness, FilterOptions, SeverityLevel } from './types';
+
+// ========== CORE EXPORTS ==========
 
 export { SensitiveWordFilter } from './filter';
 export {
@@ -13,11 +17,27 @@ export {
     SensitiveWord,
     DetectionResult,
     DetectionMatch,
-    FilterOptions
+    FilterOptions,
+    WhitelistEntry,
+    BatchDetectionResult,
+    WordListExport
 } from './types';
-export { normalizeText, normalizeArabic, normalizeEnglish } from './normalizer';
+
+// ========== UTILITY EXPORTS ==========
+
+export { normalizeText, normalizeArabic, normalizeEnglish, hasArabic, hasEnglish } from './normalizer';
 export { FuzzyMatcher } from './fuzzy-matcher';
-export { normalizeForEvasion, normalizeParanoid, detectEvasionTechnique } from './evasion-patterns';
+export { 
+    normalizeForEvasion, 
+    normalizeParanoid, 
+    detectEvasionTechnique,
+    generateEvasionVariants,
+    CHARACTER_SUBSTITUTIONS,
+    ARABIC_SUBSTITUTIONS,
+    INVISIBLE_CHARACTERS
+} from './evasion-patterns';
+
+// ========== PRESET FILTER FACTORIES ==========
 
 /**
  * Create a paranoid filter that catches EVERYTHING
@@ -83,6 +103,63 @@ export function createStrictFilter(additionalOptions?: Partial<FilterOptions>): 
 }
 
 /**
+ * Create a balanced filter with context-aware detection
+ * Best for production use - catches real profanity while avoiding false positives
+ * 
+ * @param additionalOptions - Additional options to merge with balanced defaults
+ * @returns A configured SensitiveWordFilter instance
+ * 
+ * @example
+ * ```typescript
+ * import { createBalancedFilter } from 'wordguard-filter';
+ * 
+ * const filter = createBalancedFilter();
+ * 
+ * // Won't false positive on words like "Scunthorpe" or "assassin"
+ * console.log(filter.hasMatch("Scunthorpe")); // false
+ * console.log(filter.hasMatch("assessment")); // false
+ * console.log(filter.hasMatch("fuck")); // true
+ * ```
+ */
+export function createBalancedFilter(additionalOptions?: Partial<FilterOptions>): SensitiveWordFilter {
+    return new SensitiveWordFilter({
+        enableFuzzyMatching: true,
+        strictness: DetectionStrictness.MEDIUM,
+        partialMatch: false,
+        normalize: true,
+        contextAware: true,
+        detectSymbolReplacement: true,
+        detectSpaceInsertion: true,
+        detectRepeatedLetters: true,
+        detectLanguageMixing: false,
+        maxEditDistance: 1,
+        minSeverity: SeverityLevel.MILD,
+        ...additionalOptions
+    });
+}
+
+/**
+ * Create a minimal filter that only catches exact matches
+ * Best for low false positive requirements
+ * 
+ * @param additionalOptions - Additional options to merge with minimal defaults
+ * @returns A configured SensitiveWordFilter instance
+ */
+export function createMinimalFilter(additionalOptions?: Partial<FilterOptions>): SensitiveWordFilter {
+    return new SensitiveWordFilter({
+        enableFuzzyMatching: false,
+        strictness: DetectionStrictness.LOW,
+        partialMatch: false,
+        normalize: true,
+        contextAware: true,
+        minSeverity: SeverityLevel.MODERATE,
+        ...additionalOptions
+    });
+}
+
+// ========== QUICK HELPER FUNCTIONS ==========
+
+/**
  * Quick check if text contains sensitive content using paranoid mode
  * 
  * @param text - Text to check
@@ -103,6 +180,18 @@ export function hasSensitiveContent(text: string): boolean {
 }
 
 /**
+ * Quick check if text contains sensitive content (balanced mode)
+ * Lower false positives than hasSensitiveContent
+ * 
+ * @param text - Text to check
+ * @returns True if sensitive content detected
+ */
+export function containsProfanity(text: string): boolean {
+    const filter = createBalancedFilter();
+    return filter.hasMatch(text);
+}
+
+/**
  * Quick clean text by removing/replacing sensitive content using paranoid mode
  * 
  * @param text - Text to clean
@@ -116,3 +205,53 @@ export function cleanSensitiveContent(text: string, replacementChar: string = '*
     });
     return filter.clean(text);
 }
+
+/**
+ * Quick clean text with balanced detection
+ * 
+ * @param text - Text to clean
+ * @param replacementChar - Character to replace with (default: '*')
+ * @returns Cleaned text
+ */
+export function cleanProfanity(text: string, replacementChar: string = '*'): string {
+    const filter = createBalancedFilter({
+        replaceMatches: true,
+        replacementChar
+    });
+    return filter.clean(text);
+}
+
+/**
+ * Analyze text and return detailed detection results
+ * 
+ * @param text - Text to analyze
+ * @returns Detection result with all matches and metadata
+ */
+export function analyzeText(text: string): ReturnType<SensitiveWordFilter['detect']> {
+    const filter = createBalancedFilter();
+    return filter.detect(text);
+}
+
+/**
+ * Get the severity level of the most severe match in text
+ * 
+ * @param text - Text to check
+ * @returns Highest severity level found, or null if no matches
+ */
+export function getHighestSeverity(text: string): SeverityLevel | null {
+    const filter = createBalancedFilter();
+    const result = filter.detect(text);
+    
+    if (!result.hasMatch) {
+        return null;
+    }
+    
+    return Math.max(...result.matches.map(m => m.severity)) as SeverityLevel;
+}
+
+// ========== DEFAULT EXPORT ==========
+
+/**
+ * Default export - the main filter class
+ */
+export default SensitiveWordFilter;

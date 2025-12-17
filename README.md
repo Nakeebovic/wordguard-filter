@@ -1,6 +1,6 @@
 # wordguard-filter
 
-High-performance sensitive word detection for Arabic and English with configurable severity levels.
+High-performance sensitive word detection for Arabic and English with configurable severity levels, evasion detection, and context-aware filtering.
 
 [![npm version](https://badge.fury.io/js/wordguard-filter.svg)](https://www.npmjs.com/package/wordguard-filter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -13,7 +13,12 @@ High-performance sensitive word detection for Arabic and English with configurab
 🔧 **Customizable** - Add your own sensitive words dynamically  
 🎯 **Flexible Filtering** - Filter by severity, category, and language  
 💪 **TypeScript** - Full TypeScript support with type definitions  
-🚀 **Zero Dependencies** - No external runtime dependencies
+🚀 **Zero Dependencies** - No external runtime dependencies  
+🛡️ **Evasion Detection** - Catches leet speak, symbol replacement, zero-width characters  
+📋 **Whitelist Support** - Prevent false positives with whitelisted words  
+🧠 **Context-Aware** - Smart detection that avoids the "Scunthorpe problem"  
+📦 **Batch Processing** - Efficient processing of multiple texts  
+⚡ **Async Support** - Non-blocking methods for large-scale processing  
 
 ## Installation
 
@@ -42,6 +47,61 @@ console.log(cleaned); // "This is a **** test"
 const hasMatch = filter.hasMatch('Hello world'); // false
 ```
 
+## Preset Filters
+
+Choose the right filter for your use case:
+
+```javascript
+const { 
+  createParanoidFilter,   // Maximum detection, may have false positives
+  createStrictFilter,     // High detection, fewer false positives
+  createBalancedFilter,   // Recommended for production
+  createMinimalFilter     // Only exact matches
+} = require('wordguard-filter');
+
+// Paranoid mode - catches EVERYTHING including evasion attempts
+const paranoid = createParanoidFilter();
+paranoid.hasMatch('f u c k'); // true
+paranoid.hasMatch('sh!t');    // true
+
+// Balanced mode - best for production, handles Scunthorpe problem
+const balanced = createBalancedFilter();
+balanced.hasMatch('Scunthorpe');  // false (no false positive!)
+balanced.hasMatch('assessment');  // false (no false positive!)
+balanced.hasMatch('fuck');        // true
+```
+
+## Quick Helper Functions
+
+```javascript
+const { 
+  hasSensitiveContent,   // Paranoid mode check
+  containsProfanity,     // Balanced mode check
+  cleanSensitiveContent, // Paranoid mode clean
+  cleanProfanity,        // Balanced mode clean
+  analyzeText,           // Get detailed results
+  getHighestSeverity     // Get max severity
+} = require('wordguard-filter');
+
+// Quick checks
+if (containsProfanity(userInput)) {
+  console.log('Blocked!');
+}
+
+// Clean text
+const safe = cleanProfanity(userInput);
+
+// Analyze text
+const analysis = analyzeText(userInput);
+console.log(analysis.matches);
+
+// Get severity
+const severity = getHighestSeverity(userInput);
+if (severity === SeverityLevel.EXTREME) {
+  banUser();
+}
+```
+
 ## API Reference
 
 ### SensitiveWordFilter
@@ -55,135 +115,100 @@ new SensitiveWordFilter(options?: FilterOptions)
 ```
 
 **Options:**
-- `minSeverity` - Minimum severity level to detect (default: `SeverityLevel.MILD`)
-- `maxSeverity` - Maximum severity level to detect (default: `SeverityLevel.EXTREME`)
-- `partialMatch` - Match partial words (default: `false`)
-- `normalize` - Normalize text before matching (default: `true`)
-- `replaceMatches` - Replace matches with asterisks (default: `false`)
-- `replacementChar` - Character to use for replacement (default: `'*'`)
-- `languages` - Languages to check (default: `['en', 'ar']`)
-- `categories` - Specific categories to check (default: all)
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `minSeverity` | `SeverityLevel` | `MILD` | Minimum severity to detect |
+| `maxSeverity` | `SeverityLevel` | `EXTREME` | Maximum severity to detect |
+| `partialMatch` | `boolean` | `false` | Match partial words |
+| `normalize` | `boolean` | `true` | Normalize text before matching |
+| `replaceMatches` | `boolean` | `false` | Replace matches with asterisks |
+| `replacementChar` | `string` | `'*'` | Character for replacement |
+| `languages` | `('en'\|'ar')[]` | `['en', 'ar']` | Languages to check |
+| `categories` | `string[]` | all | Categories to check |
+| `enableFuzzyMatching` | `boolean` | `false` | Enable evasion detection |
+| `strictness` | `DetectionStrictness` | `MEDIUM` | Detection strictness level |
+| `contextAware` | `boolean` | `false` | Enable context-aware detection |
+| `whitelist` | `WhitelistEntry[]` | `[]` | Words to allow |
 
-#### Methods
+#### Core Methods
 
-##### `detect(text: string, options?: Partial<FilterOptions>): DetectionResult`
+```typescript
+// Detect sensitive words
+detect(text: string, options?: Partial<FilterOptions>): DetectionResult
 
-Detect sensitive words in text.
+// Check if text has matches
+hasMatch(text: string, options?: Partial<FilterOptions>): boolean
 
-```javascript
-const result = filter.detect('This text contains profanity');
-console.log(result);
-// {
-//   hasMatch: true,
-//   matches: [
-//     {
-//       word: 'profanity',
-//       severity: 2,
-//       category: 'profanity',
-//       position: 21,
-//       length: 9
-//     }
-//   ],
-//   text: 'This text contains profanity'
-// }
+// Clean text by replacing matches
+clean(text: string, options?: Partial<FilterOptions>): string
 ```
 
-##### `hasMatch(text: string, options?: Partial<FilterOptions>): boolean`
+#### Whitelist Methods
 
-Check if text contains any sensitive words.
+```typescript
+// Add word to whitelist
+addToWhitelist(word: string | WhitelistEntry): void
 
-```javascript
-const hasMatch = filter.hasMatch('Clean text'); // false
+// Add multiple words to whitelist
+addManyToWhitelist(words: (string | WhitelistEntry)[]): void
+
+// Remove from whitelist
+removeFromWhitelist(word: string): void
+
+// Clear entire whitelist
+clearWhitelist(): void
+
+// Get all whitelisted entries
+getWhitelist(): WhitelistEntry[]
+
+// Check if word is whitelisted
+isWhitelisted(word: string): boolean
 ```
 
-##### `clean(text: string, options?: Partial<FilterOptions>): string`
+#### Batch Processing
 
-Replace sensitive words with asterisks.
+```typescript
+// Detect in multiple texts at once
+detectBatch(texts: string[], options?: Partial<FilterOptions>): BatchDetectionResult
 
-```javascript
-const cleaned = filter.clean('This is bad');
-console.log(cleaned); // "This is ***"
+// Check if any text has matches
+hasMatchInAny(texts: string[], options?: Partial<FilterOptions>): boolean
+
+// Clean multiple texts
+cleanBatch(texts: string[], options?: Partial<FilterOptions>): string[]
 ```
 
-##### `addWord(word: SensitiveWord): void`
+#### Async Methods
 
-Add a custom sensitive word.
+```typescript
+// Async detection (non-blocking)
+async detectAsync(text: string, options?: Partial<FilterOptions>): Promise<DetectionResult>
 
-```javascript
-filter.addWord({
-  word: 'custom',
-  severity: SeverityLevel.MODERATE,
-  category: 'custom',
-  language: 'en'
-});
+// Async batch with chunking
+async detectBatchAsync(
+  texts: string[], 
+  options?: Partial<FilterOptions>,
+  chunkSize?: number
+): Promise<BatchDetectionResult>
 ```
 
-##### `addWords(words: SensitiveWord[]): void`
+#### Export/Import
 
-Add multiple custom words.
+```typescript
+// Export custom words
+exportCustomWords(): WordListExport
+exportToJSON(): string
 
-```javascript
-filter.addWords([
-  { word: 'word1', severity: SeverityLevel.MILD },
-  { word: 'word2', severity: SeverityLevel.SEVERE }
-]);
-```
+// Import words
+importWords(wordList: WordListExport, replace?: boolean): void
+importFromJSON(json: string, replace?: boolean): void
 
-##### `removeWord(word: string): void`
-
-Remove a custom word.
-
-```javascript
-filter.removeWord('custom');
-```
-
-##### `clearCustomWords(): void`
-
-Clear all custom words.
-
-```javascript
-filter.clearCustomWords();
-```
-
-##### `getCustomWords(): SensitiveWord[]`
-
-Get all custom words.
-
-```javascript
-const customWords = filter.getCustomWords();
-```
-
-##### `setOptions(options: Partial<FilterOptions>): void`
-
-Update filter options.
-
-```javascript
-filter.setOptions({
-  minSeverity: SeverityLevel.MODERATE,
-  languages: ['en']
-});
-```
-
-##### `getStats(): object`
-
-Get statistics about the word database.
-
-```javascript
-const stats = filter.getStats();
-console.log(stats);
-// {
-//   totalWords: 250,
-//   customWords: 5,
-//   defaultWords: 245,
-//   byLanguage: { en: 150, ar: 100 },
-//   bySeverity: { 1: 50, 2: 80, 3: 70, 4: 50 },
-//   byCategory: { profanity: 60, hate_speech: 40, ... }
-// }
+// Export/import whitelist
+exportWhitelist(): WhitelistEntry[]
+importWhitelist(entries: WhitelistEntry[], replace?: boolean): void
 ```
 
 ## Severity Levels
-
-The package uses 4 severity levels:
 
 | Level | Name | Description | Examples |
 |-------|------|-------------|----------|
@@ -191,6 +216,15 @@ The package uses 4 severity levels:
 | 2 | MODERATE | Common profanity, offensive terms | ass, shit, loser |
 | 3 | SEVERE | Strong profanity, explicit content | fuck, bitch, dick |
 | 4 | EXTREME | Extreme hate speech, illegal content | racial slurs, extreme violence |
+
+## Detection Strictness
+
+| Level | Name | Description |
+|-------|------|-------------|
+| 1 | LOW | Only exact matches |
+| 2 | MEDIUM | Basic evasion detection |
+| 3 | HIGH | Aggressive fuzzy matching |
+| 4 | PARANOID | Maximum detection |
 
 ## Categories
 
@@ -205,76 +239,106 @@ Words are organized into categories:
 
 ## Advanced Usage
 
-### Filter by Severity
+### Context-Aware Detection
+
+Avoid false positives like the famous "Scunthorpe problem":
 
 ```javascript
-// Only detect severe and extreme words
 const filter = new SensitiveWordFilter({
-  minSeverity: SeverityLevel.SEVERE
+  contextAware: true
 });
 
-const result = filter.detect('This is damn bad'); // No match (damn is MILD)
+// These won't trigger false positives
+filter.hasMatch('Scunthorpe');  // false
+filter.hasMatch('assessment');  // false
+filter.hasMatch('cocktail');    // false
+
+// Real profanity still detected
+filter.hasMatch('fuck');        // true
 ```
 
-### Filter by Category
-
-```javascript
-// Only detect hate speech
-const filter = new SensitiveWordFilter({
-  categories: ['hate_speech']
-});
-```
-
-### Filter by Language
-
-```javascript
-// Only detect English words
-const filter = new SensitiveWordFilter({
-  languages: ['en']
-});
-
-// Only detect Arabic words
-const arabicFilter = new SensitiveWordFilter({
-  languages: ['ar']
-});
-```
-
-### Arabic Text Support
-
-The package properly handles Arabic text with:
-- Diacritic removal
-- Unicode normalization
-- Character variations (e.g., different forms of Alef)
+### Whitelist for Custom Words
 
 ```javascript
 const filter = new SensitiveWordFilter();
 
-// Detects Arabic sensitive words
+// Whitelist specific words for your domain
+filter.addToWhitelist('Scunthorpe');
+filter.addToWhitelist('assemble');
+
+// Or add many at once
+filter.addManyToWhitelist([
+  'class',
+  'assessment',
+  { word: 'custom', caseSensitive: true }
+]);
+```
+
+### Evasion Detection
+
+```javascript
+const { createParanoidFilter } = require('wordguard-filter');
+
+const filter = createParanoidFilter();
+
+// Catches all these evasion attempts:
+filter.hasMatch('f u c k');     // true (space insertion)
+filter.hasMatch('sh!t');        // true (symbol replacement)
+filter.hasMatch('fuuuuck');     // true (letter repetition)
+filter.hasMatch('f@ck');        // true (leet speak)
+filter.hasMatch('fu\u200Bck');  // true (zero-width chars)
+```
+
+### Batch Processing
+
+```javascript
+const filter = new SensitiveWordFilter();
+
+// Process many texts efficiently
+const texts = ['text1', 'text2', 'text3', ...];
+const result = filter.detectBatch(texts);
+
+console.log(`Found ${result.totalMatches} matches`);
+console.log(`Processed in ${result.processingTimeMs}ms`);
+
+// Non-blocking for large batches
+const asyncResult = await filter.detectBatchAsync(texts, undefined, 100);
+```
+
+### Custom Words
+
+```javascript
+const filter = new SensitiveWordFilter();
+
+// Add custom word
+filter.addWord({
+  word: 'custom',
+  severity: SeverityLevel.MODERATE,
+  category: 'custom',
+  language: 'en'
+});
+
+// Export for later use
+const json = filter.exportToJSON();
+localStorage.setItem('customWords', json);
+
+// Import saved words
+const newFilter = new SensitiveWordFilter();
+newFilter.importFromJSON(localStorage.getItem('customWords'));
+```
+
+### Arabic Text Support
+
+```javascript
+const filter = new SensitiveWordFilter();
+
+// Handles Arabic with:
+// - Diacritic removal
+// - Tatweel (kashida) normalization
+// - Character variation handling
+
 const result = filter.detect('هذا النص يحتوي على كلمات سيئة');
-console.log(result.hasMatch); // true if contains sensitive words
-```
-
-### Custom Replacement Character
-
-```javascript
-const filter = new SensitiveWordFilter({
-  replaceMatches: true,
-  replacementChar: '#'
-});
-
-const cleaned = filter.clean('This is bad');
-console.log(cleaned); // "This is ###"
-```
-
-### Partial Matching
-
-```javascript
-// Match words even if they're part of other words
-const filter = new SensitiveWordFilter({
-  partialMatch: true
-});
-
-const result = filter.detect('assassin'); // Will match 'ass'
+console.log(result.hasMatch);
 ```
 
 ## Performance
@@ -295,13 +359,32 @@ Full TypeScript support with type definitions:
 ```typescript
 import { 
   SensitiveWordFilter, 
-  SeverityLevel, 
+  SeverityLevel,
+  DetectionStrictness,
   DetectionResult,
-  FilterOptions 
+  FilterOptions,
+  WhitelistEntry,
+  BatchDetectionResult
 } from 'wordguard-filter';
 
-const filter: SensitiveWordFilter = new SensitiveWordFilter();
+const filter: SensitiveWordFilter = new SensitiveWordFilter({
+  contextAware: true,
+  strictness: DetectionStrictness.MEDIUM
+});
+
 const result: DetectionResult = filter.detect('test');
+```
+
+## ESM and CommonJS
+
+This package supports both module systems:
+
+```javascript
+// CommonJS
+const { SensitiveWordFilter } = require('wordguard-filter');
+
+// ESM
+import { SensitiveWordFilter } from 'wordguard-filter';
 ```
 
 ## Contributing
@@ -311,7 +394,8 @@ Contributions are welcome! To add new words or improve the package:
 1. Fork the repository
 2. Create a feature branch
 3. Add words to `src/data/english.json` or `src/data/arabic.json`
-4. Submit a pull request
+4. Add tests for new features
+5. Submit a pull request
 
 ## License
 

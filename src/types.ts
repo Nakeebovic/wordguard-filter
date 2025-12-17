@@ -12,10 +12,26 @@ export enum SeverityLevel {
  * Detection strictness levels for fuzzy matching
  */
 export enum DetectionStrictness {
-    LOW = 1,       // Only exact matches
-    MEDIUM = 2,    // Basic evasion detection (symbols, spaces)
-    HIGH = 3,      // Aggressive fuzzy matching (all techniques)
-    PARANOID = 4   // Maximum detection - catches EVERYTHING (may have false positives)
+    /** Only exact matches - no fuzzy matching */
+    LOW = 1,
+    /** Basic evasion detection (symbols, spaces) */
+    MEDIUM = 2,
+    /** Aggressive fuzzy matching (all techniques) */
+    HIGH = 3,
+    /** Maximum detection - catches EVERYTHING (may have false positives) */
+    PARANOID = 4
+}
+
+/**
+ * Whitelist entry for allowed words
+ */
+export interface WhitelistEntry {
+    /** The word to allow */
+    word: string;
+    /** Whether to match case-sensitively */
+    caseSensitive?: boolean;
+    /** Whether to match as whole word only */
+    wholeWord?: boolean;
 }
 
 /**
@@ -145,6 +161,42 @@ export interface FilterOptions {
      * @default true
      */
     detectLanguageMixing?: boolean;
+
+    /**
+     * Enable context-aware detection to reduce false positives
+     * (e.g., "Scunthorpe" won't match "cunt")
+     * @default false
+     */
+    contextAware?: boolean;
+
+    /**
+     * Whitelist of words to always allow
+     */
+    whitelist?: WhitelistEntry[];
+}
+
+/**
+ * Result of batch detection
+ */
+export interface BatchDetectionResult {
+    /** Array of detection results for each input */
+    results: DetectionResult[];
+    /** Total processing time in milliseconds */
+    processingTimeMs: number;
+    /** Total number of matches across all inputs */
+    totalMatches: number;
+}
+
+/**
+ * Export format for word lists
+ */
+export interface WordListExport {
+    /** Export version for compatibility */
+    version: string;
+    /** Export timestamp */
+    exportedAt: string;
+    /** Words in the export */
+    words: SensitiveWord[];
 }
 
 /**
