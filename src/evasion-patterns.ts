@@ -280,7 +280,10 @@ export function normalizeForEvasion(text: string, options: {
     }
 
     // Handle language mixing (Arabic to English)
-    if (handleLanguageMixing) {
+    // Only apply if text contains English characters to avoid false positives
+    // converting pure Arabic to English (e.g. "انا احمد" -> "ana ahmad" matching "anal")
+    const hasEnglish = /[a-z]/i.test(normalized);
+    if (handleLanguageMixing && hasEnglish) {
         for (const [arabic, english] of Object.entries(ARABIC_ENGLISH_LOOKALIKES)) {
             normalized = normalized.replace(new RegExp(arabic, 'g'), english);
         }
