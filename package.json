@@ -1,6 +1,6 @@
 {
   "name": "wordguard-filter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "High-performance sensitive word detection for Arabic and English with configurable severity levels",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
